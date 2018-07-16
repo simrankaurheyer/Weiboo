@@ -1,0 +1,36 @@
+<div class="container" ng-Controller="UserController">
+<div class="container">
+   <div class="card" style="width:600px;padding:0;min-height:300px;">
+    
+ <div class="card-body" style="padding:0; ">
+   <h2 style="text-align:center;background-color:teal;padding:15px;">PROFILE DETAILS</h2>
+    <div>
+    <div style="float:right; font-weight:bold;margin-right:80px; text-align:right;">
+        <img src="http://localhost:8086/WeiboRestServices/profile/getProfilePicture/{{CurrentUser.loginname}}" height="150px" width="120px">
+   </div>
+    
+    
+    <div style="float:left;margin-left:30px;">
+ 	    <div class="form-group">
+      		<label><b>Email:</b> {{CurrentUser.email}}</label>
+        </div>
+    
+    	<div class="form-group">
+      		<label><b>Name:</b> {{CurrentUser.name}}</label>
+   		 </div>
+    </div>
+    
+    </div>
+    
+    
+    
+  </div>
+  <hr>
+  <div style="padding:15px;text-align:center;">
+     <form action="http://localhost:8086/WeiboRestServices/uploadimage" method="post" enctype="multipart/form-data"> 
+        <input type="file" name="profilepicture" ng-model="Profile.profilepicture">
+     	<button type="submit" class="btn btn-primary">Upload</button>
+  	</form>
+    </div>
+</div>
+</div></div>

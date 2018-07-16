@@ -1,0 +1,21 @@
+<div class="container" ng-Controller="ForumController">
+  <h2>Forum</h2>
+  <div ng-repeat="forum in forums">
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{forum.forumid}}">{{forum.forumname}}</button>
+
+  
+  <label ng-show="forum.forumstatus=='N'"><span class="badge badge-pill badge-secondary">Pending For Approval</span></label>
+  <label ng-show="forum.forumstatus=='NA'"><span class="badge badge-pill badge-dark">Rejected</span></label>
+  <label ng-show="forum.forumstatus=='A'"><span class="badge badge-pill badge-success">Approved</span></label>
+  
+  <div id="{{forum.forumid}}" class="collapse">
+		{{forum.forumcontent}}<br>
+  <button type="button" class="btn btn-danger" ng-show="CurrentUser.forum==forum.email" ng-click="deleteforum(forum.forumid)">Delete</button>
+  <button type="button" ng-show="forum.forumstatus=='N' && CurrentUser.role == 'A'" class="btn btn-primary" ng-click="approveforum(forum.forumid)">Approve</button>
+  <button type="button" ng-show="forum.forumstatus=='N' && CurrentUser.role == 'A'" class="btn btn-primary" ng-click="rejectforum(forum.forumid)">Reject</button>
+  <button type="button" class="btn btn-warning" ng-click="incrementlike(forum.forumid)">Like <span class="badge badge-light">{{forum.forumlikes}}</span></button>
+</div>
+<br>
+<hr>
+</div>
+</div>

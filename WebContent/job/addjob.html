@@ -1,0 +1,20 @@
+<div class="container" ng-Controller="JobController">
+
+<div align="center" class="container">
+  <div class="card" style="width:800px">
+  <h2 style="background-color:cyan;padding:15px;text-align:center;">Add Jobs</h2>
+    
+    <div class="card-body">
+     <form>
+     <input class="form-control" type="text" placeholder="Enter Job Title" ng-model="Job.jobtitle"><br>
+     <textarea rows="2" class="form-control" placeholder="Enter Job Description" ng-model="Job.jobdescription"></textarea><br>
+     <input class="form-control" type="text" placeholder="Enter Job Qualification Required" ng-model="Job.jobqualification"><br>
+     <input class="form-control" type="text" placeholder="Enter Job salary" ng-model="Job.jobsalary"><br>
+     <input class="form-control" type="text" placeholder="Enter Total vacancies" ng-model="Job.no_of_openings"><br>
+    
+     <button class="btn btn-primary" ng-click="addjob()">ADD</button>
+     </form>
+    </div>
+  </div>
+</div>
+</div>

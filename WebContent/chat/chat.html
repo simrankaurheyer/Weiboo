@@ -1,0 +1,29 @@
+
+<div class="container" ng-controller="ChatController">
+<h1 class="well"><center><font face="Comic Sans MS" style="color:black">CHAETING<font style="color:black"> HAJA..</font></font></center></h1>
+	<div class="col-lg-12 well">
+	<div class="row">
+				<form ng-submit="addMessage()" name="chatMsg"> 
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label>Message</label>
+								<!-- <input type="text" name="message" ng-model="message"  placeholder="Enter Chat Message Here.." class="form-control"> -->
+								<textarea rows="5" cols="140" name="message" placeholder="enter Messge here.." ng-model="message" class="form-control"></textarea>
+								<span class="count" ng-bind="max - message.length">200</span>
+							</div>
+						 </div>
+						 </div>
+					<div>
+					<button ng-disabled="message.length>140||message.length==0" class="btn btn-lg btn-info">Send</button>	</div>				
+				</form> 
+	</div>
+	</div>
+	
+	<div class="container1" ng-repeat="message in messages|orderBy:'time':true" >  
+  <p>{{message.message}}</p>
+  <span class="time-right">{{message.time|date:'h:mm a'}}</span>
+</div>
+	
+	
+</div>

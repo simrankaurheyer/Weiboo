@@ -1,0 +1,46 @@
+<div class="container" ng-Controller="FriendController">
+  <h2>Friend List</h2>
+            
+  <table  ng-hide="friendlist==undefined" class="table table-hover">
+    <thead>
+      <tr>
+        <th>Friend ID</th>
+        <th>Friend Name</th>
+        <th>Profile picture</th>
+        <th></th>
+      </tr>
+    </thead>
+    
+    <tbody  ng-repeat="friend in friendlist">
+    <tr>
+        <td>{{friend.friendid}}</td>
+        <td><label ng-show="CurrentUser.loginname==friend.loginname">{{friend.friendname}}</label>
+        	<label ng-show="CurrentUser.loginname==friend.friendname">{{friend.loginname}}</label></td>
+        
+        <td><img alt="" ng-show="CurrentUser.loginname==friend.loginname" height="120px" width="100px" src="http://localhost:8086/WeiboRestServices/friends/profile/getProfilePicture/{{friend.friendname}}">
+        	<img alt="" ng-show="CurrentUser.loginname==friend.friendname" height="120px" width="100px" src="http://localhost:8086/WeiboRestServices/friends/profile/getProfilePicture/{{friend.loginname}}"></td>
+        <td>
+        <button class="btn btn-primary" ng-click="unfriend(friend.friendid)">UnFriend</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+    <table ng-show="friendlist==undefined" class="table table-hover">
+    <thead>
+      <tr>
+        <th>Friend ID</th>
+        <th>Friend Name</th>
+        <th>Profile picture</th>
+        <th></th>
+      </tr>
+    </thead>
+    
+    <tbody >
+    <tr>
+        <td style="text-align:center; font-size:25px;"><b>No friends added yet!!</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

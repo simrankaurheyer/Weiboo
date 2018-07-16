@@ -1,0 +1,29 @@
+<div class="container" ng-Controller="FriendController">
+  <h2>Friend List</h2>
+            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Friend ID</th>
+        <th>Friend Name</th>
+        <th>Profile picture</th>
+        <th></th>
+      </tr>
+    </thead>
+    
+    <tbody ng-repeat="request in pendinglist">
+    <tr>
+        <td>{{request.friendid}}</td>
+         <td><label ng-show="CurrentUser.loginname==request.loginname">{{request.friendname}}</label>
+        	<label ng-show="CurrentUser.loginname==request.friendname">{{request.loginname}}</label></td>
+        
+        <td><img alt="" ng-show="CurrentUser.loginname==request.loginname" height="120px" width="100px" src="http://localhost:8086/WeiboRestServices/friends/profile/getProfilePicture/{{request.friendname}}">
+        	<img alt="" ng-show="CurrentUser.loginname==request.friendname" height="120px" width="100px" src="http://localhost:8086/WeiboRestServices/friends/profile/getProfilePicture/{{request.loginname}}"></td>
+        <td>
+        <button class="btn btn-primary" ng-hide="CurrentUser.loginname == request.loginname" ng-click="acceptrequest(request.friendid)">Accept Request</button>
+        <button class="btn btn-primary" ng-click="cancelrequest(request.friendid)">Cancel Request</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

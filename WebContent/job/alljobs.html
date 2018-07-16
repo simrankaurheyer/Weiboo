@@ -1,0 +1,30 @@
+ <br><div style="min-height:400px;padding:0;" class="container" ng-Controller="JobController" ><br>
+ 
+ <div class="container" style="padding:0;margin-top:-22px;background-color:black;">
+  <h2 style="background-color:black;padding:15px;text-align:center;color:white;">All Jobs</h2>
+   <div ng-repeat="job in joblist" style="padding:20px;">
+  <div class="card" style="border:1px solid black;">
+    <div class="card-header">
+    <div style="float:left;font-size:20px;">
+    <b>{{job.jobtitle}}</b>
+    </div>
+    <div style="float:right;font-size:15px;">
+    <b> {{job.posted_date}}</b>
+    </div>
+    </div>
+    <div class="card-body">
+  		<p>  <b>Job Description:  </b>  {{job.jobdescription}} </p>
+  		<p>  <b>Qualifications Required:</b>  {{job.jobqualification}} </p>
+   		<p>  <b>Salary:  </b>  {{job.jobsalary}} </p>
+     	<p> <b>No. of Vacancies:  </b>  {{job.no_of_openings}} </p>
+    </div> 
+    <div class="card-footer">
+    	<button ng-click="applyforid(job.jobid)">Apply</button>
+    	<button ng-click="deletejob(job.jobid)">Delete</button>
+    	<button style="float:right;" ng-click="closejob(job.jobid)">Close</button>
+    </div>
+  </div>
+  
+</div>
+</div>
+</div>

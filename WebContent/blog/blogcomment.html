@@ -1,0 +1,52 @@
+<div ng-Controller="BlogController">
+<br>
+<div align="center">
+	<div class="card" style="width:800px;min-height:600px;padding:0px;border:0;">
+ 	 <h4 style="background-color:powderblue;padding:10px;" align="center" class="card-title"><b>Comments</b></h4><br>
+    	<div class="card-body">
+    
+   		<form  ng-submit="commentblog()" method="post">
+   			<div style="background-color:ghostwhite;padding:10px;">
+   			<div class="input-group mb-3">
+      			<div class="input-group-prepend"> 
+      			</div>
+      			<p style="font-weight:bold;font-size:30px;">{{commentedBlogData.blogname}}</p>
+    		</div>
+    		<div class="input-group mb-3">
+      			<div class="input-group-prepend"> 
+      			</div>
+      			<p>{{commentedBlogData.blogcontent}}</p>
+    		</div>
+   			</div>
+   			<hr><br>
+   			<div class="input-group mb-3">
+      			<div class="input-group-prepend">
+        		<span class="input-group-text"><i class="fa fa-sticky-note" style="font-size:20px"></i></span>
+      			</div>
+      			<textarea class="form-control" rows="2" ng-disabled="CurrentUser == undefined" ng-model="BlogComment.comments" placeholder="Enter Comment here"></textarea>
+    		</div>
+    		
+    		<div align="center">
+    			<button type="submit" style="width:60%;line-height:80%;padding:10px;" ng-disabled="CurrentUser == undefined" class="btn btn-primary">Comment</button>
+  			</div>
+  		</form>
+		<br><hr>
+		
+		<div style="text-align:left;" class="container mt-3" ng-repeat="comment in commentedData|orderBy:'comment.commentedDate':true">
+  			<div class="media border p-3">
+    		<img src=" http://localhost:8086/WeiboRestServices/friends/profile/getProfilePicture/{{comment.loginname}}" alt="" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+    			<div class="media-body">
+      				<h4>{{comment.loginname}}&nbsp;&nbsp;<small><i>Posted on: {{comment.commentedDate}}</i></small></h4>
+      				<p>{{comment.comments}}</p>  
+      				<button ng-show="CurrentUser.loginname== comment.loginname" class="btn btn-default" ng-click="removeBlogComment(comment.blogcommentid)">Delete</button>    
+    			</div>
+  			</div>
+		</div>
+		
+		
+		
+		</div>
+	</div>
+</div>
+
+</div>

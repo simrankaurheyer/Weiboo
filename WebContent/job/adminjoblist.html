@@ -1,0 +1,28 @@
+<div class="container" ng-Controller="JobController">          
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>JOBID</th>
+        <th>Email</th>
+        <th>APPLIED DATE</th>
+        <th>REASON</th>
+        <th>STATUS</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="job in appliedjobsadmin"> 
+      <tr>
+        <td>{{job.jobid}}</td>
+        <td>{{job.email}}</td>
+        <td>{{job.applied_date}}</td>
+        <td>{{job.jobapplicationreason}}</td>
+        
+       <td ng-show="job.jobapplicationstatus == 'N'"><button class="btn btn-primary" ng-click="approveapplication(job.jobapplicationid)">Approve</button>
+        <button class="btn btn-primary" ng-click="rejectapplication(job.jobapplicationid)">Reject</button></td>
+        
+       <td ng-show="job.jobapplicationstatus=='A'">Approved</td>
+       <td ng-show="job.jobapplicationstatus=='R'">Rejected</td> 
+      </tr>
+     
+    </tbody>
+  </table>
+</div>

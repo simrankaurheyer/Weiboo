@@ -1,0 +1,23 @@
+<div class="container" ng-Controller="BlogController">
+  <h2>All Blogs</h2>
+  <div ng-repeat="blog in blogs">
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{blog.blogid}}">{{blog.blogname}}</button>
+
+  
+  <label ng-show="blog.blogstatus=='N'"><span class="badge badge-pill badge-secondary">Pending For Approval</span></label>
+  <label ng-show="blog.blogstatus=='NA'"><span class="badge badge-pill badge-dark">Rejected</span></label>
+  <label ng-show="blog.blogstatus=='A'"><span class="badge badge-pill badge-success">Approved</span></label>
+  
+  <div id="{{blog.blogid}}" class="collapse">
+{{blog.blogcontent}}<br>
+  <button type="button" class="btn btn-danger" ng-show="CurrentUser.email==blog.email" ng-click="deleteblog(blog.blogid)">Delete</button>
+  <button type="button" ng-show="blog.blogstatus=='N' && CurrentUser.role == 'A'" class="btn btn-primary" ng-click="approveblog(blog.blogid)">Approve</button>
+  <button type="button" ng-show="blog.blogstatus=='N' && CurrentUser.role == 'A'" class="btn btn-primary" ng-click="rejectblog(blog.blogid)">Reject</button>
+  <button type="button" ng-show="blog.blogstatus=='A' " class="btn btn-info" ng-click="commentedblog(blog.blogid)">Comment</button>
+  <button type="button" class="btn btn-warning"   ng-click="incrementlike(blog.blogid)">Like <span class="badge badge-light">{{blog.bloglikes}}</span></button>
+</div>
+<br>
+<hr>
+
+  </div>
+</div>

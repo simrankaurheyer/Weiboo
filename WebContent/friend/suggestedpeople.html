@@ -1,0 +1,26 @@
+<div class="container" ng-Controller="FriendController">
+  <h2>Friend List</h2>
+            
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Friend Name</th>
+        <th>Profile picture</th>
+        <th></th>
+      </tr>
+    </thead>
+    
+    <tbody ng-repeat="p in suggestlist">
+    <tr>
+        <td></td>
+        <td>{{p.loginname}}</td>
+        
+        <td><img alt=""height="120px" width="100px" src="http://localhost:8086/WeiboRestServices/friends/profile/getProfilePicture/{{p.loginname}}">
+        <td>
+        <button class="btn btn-primary" ng-click="sendrequest(p.loginname)">Send Request</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

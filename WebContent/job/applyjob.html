@@ -1,0 +1,22 @@
+<div class="container" ng-Controller="JobController">
+
+<div align="center" class="container">
+  <div class="card" style="width:800px">
+  <h2 style="background-color:cyan;padding:15px;text-align:center;">Job Application</h2>
+    
+    <div class="card-body">
+     
+    <form>
+<label class="form-control" style="text-align:left;">{{jobb.jobid}}</label>
+<label class="form-control" style="text-align:left;">{{jobb.jobtitle}}</label>
+<label class="form-control" style="text-align:left;">{{jobb.jobdescription}}</label>
+<label class="form-control" style="text-align:left;">{{jobb.jobsalary}}</label>
+<label class="form-control" style="text-align:left;">{{jobb.jobqualification}}</label>
+<textarea rows="2" ng-model="JobApplication.jobapplicationreason" class="form-control" style="text-align:left;" placeholder="Enter reason here"></textarea>
+<br><button class="btn btn-primary" ng-click="applyjob()">Apply</button>
+</form>
+    
+    </div>
+  </div>
+</div>
+</div>

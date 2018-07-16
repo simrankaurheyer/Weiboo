@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+<script src="RouteConfig.js"></script>
+<script src="user/UserController.js"></script>
+<script src="blog/BlogController.js"></script>
+<script src="forum/ForumController.js"></script>
+<script src="friend/FriendController.js"></script>
+<script src="chat/ChatController.js" type="text/javascript"></script>
+<script src="chat/ChatService.js" type="text/javascript"></script>
+<script src="frontController.js"></script>
+<script src="job/JobController.js"></script>
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.3/lodash.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<title>WEIBO</title>
+</head>
+<body ng-app="myApp" background="resources/bg1.jpg" style="background-repeat:no-repeat;background-size:100%; background-attachment:fixed;">
+
+<nav class="navbar navbar-expand-sm" style="background-color:black";>
+  
+  <a class="navbar-brand" href="#/home" style="color:white; font-weight:bold;">WEIBO</a>
+  
+  <ul class="navbar-nav">
+  
+  
+   <li class="nav-item dropdown" >
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color:white;">
+        Jobs
+      </a>
+      <div class="dropdown-menu" >
+        <a class="dropdown-item" href="#/alljobs">All Jobs</a>
+        <a class="dropdown-item" href="#/addjob" ng-show="CurrentUser.role =='A'">Add Jobs</a>
+        <a class="dropdown-item" href="#/appliedjobs" ng-hide="CurrentUser.role =='A'">My Applications</a>
+        <a class="dropdown-item" href="#/adminjoblist" ng-show="CurrentUser.role =='A'">All Applications</a>
+      </div>
+    </li>
+  
+  
+  <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown" style="color:white;">
+        Blog
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#/showblog">Show Blog</a>
+        <a class="dropdown-item" ng-hide="CurrentUser==undefined"  href="#/addblog">Add Blog</a>
+      	<a class="dropdown-item" ng-hide="CurrentUser==undefined"  href="#/myblog">My Blogs</a>
+      </div>
+    </li>
+    
+    <!-- <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color:white;">
+        Forum
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#/allforum">Show Forum</a>
+        <a class="dropdown-item" ng-show="CurrentUser.role=='A'" ng-hide="CurrentUser==undefined" href="#/addforum">Add Forum</a>
+      
+      </div>
+    </li> -->
+    
+    <li class="nav-item dropdown" ng-hide="CurrentUser==undefined">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color:white;">
+        Friend
+      </a>
+      <div class="dropdown-menu" ng-hide="CurrentUser==undefined">
+        <a class="dropdown-item" href="#/myfriends">My Friends</a>
+        <a class="dropdown-item" href="#/suggestedpeople">Suggested People</a>
+        <a class="dropdown-item" href="#/friendrequest">Friend Requests</a>
+      </div>
+    </li>
+    
+    
+    
+    
+    
+
+   <li class="nav-item">
+      <a class="nav-link" href="#/chat" style="color:white;"> Chat </a>
+    </li>
+
+     <li class="nav-item">
+      <a class="nav-link" href="#/contactUs" style="color:white;">Contact Us</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link" href="#/aboutUs" style="color:white;">About Us</a>
+    </li>
+  
+  </ul>
+  
+  <!-- Links -->
+  <ul class="navbar-nav ml-auto">
+  <li ng-hide="CurrentUser==undefined"> <a class="nav-link" href="#" style="color:white;">Welcome, {{CurrentUser.name}}</a> </li>
+  <li ng-hide="CurrentUser == undefined"><img src="http://localhost:8086/WeiboRestServices/profile/getProfilePicture/{{CurrentUser.loginname}}" height="40px" width="40px"></li>
+    <li class="nav-item">
+      <a class="nav-link" ng-show="CurrentUser==undefined" href="#/register" style="color:white;">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" ng-show="CurrentUser==undefined" href="#/login" style="color:white;">Login</a>
+    </li>
+    <li  ng-hide="CurrentUser==undefined" class="nav-item">
+      <a class="nav-link" href="#/logout" style="color:white;">Logout</a>
+    </li>
+    <li  ng-hide="CurrentUser==undefined" class="nav-item">
+      <a class="nav-link" href="#/editprofile" style="color:white;">Edit Profile</a>
+    </li>
+  </ul>
+   
+
+</nav>
+<br><br>
+
+
+<!-- footer -->
+
+<!-- <div class="container-fluid" style="background: GRAY;">
+        <div class="row">
+		     <br>
+            Start First section footer
+                <div class="col-md-4" align="Center">
+                    <p class="title" style="color:Wheat;font-weight:600"> Registered Office:</p>
+                    <h5 style="color:Black;" ><a href="index" style="text-decoration: none;color: Gray;">Weibo</a></h5>          
+                    <h5 style="color:Black;">South Extention </h5>
+                             
+                    <h5 style="color:Black;">New Delhi-(INDIA)</h5>
+                    <h5 style="color:Black;">Mobile : +91-9876543210</h5>
+                    <h5 style="color:Black;">Email : <a href="#" style="color: Wheat;">services@weibo.com</a></h5> 
+                 </div>
+            End First section footer
+
+            Start Second section footer
+                <div class="col-md-4" align="Center">
+                    <p class="title" style="color:Wheat;font-weight:600">Useful Links:</p>
+                        <h5><a href="index" style="color:Black;">Home</a></h5>
+                        <h5><a href="pages/aboutus" style="color:Black;">About Us</a></h5>
+                        <h5><a href="pages/contactus" style="color:Black;">Contact Us</a></h5>
+                        <h5><a href="user/register" style="color:Black;">Register</a></h5>
+                        <h5><a href="user/login" style="color:Black;">Login</a></h5>
+                    
+                </div>
+
+            End Second section footer
+
+            Start First section footer
+
+                <div class="col-md-4 social" align="Center">              
+                    <p style="color:Wheat;font-weight:600">Connect With Us:</p>
+                        <h5><a href="https://www.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a></h5>
+                        <h5><a href="https://plus.google.com/"><i class="fa fa-google-plus" aria-hidden="true"></i></a></h5>
+                        <h5><a href="https://in.linkedin.com/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></h5>
+                        <h5><a href="https://twitter.com/"><i class="fa fa-twitter" aria-hidden="true"></i></a></h5>
+                   
+                </div>    
+        </div>
+        <hr style="margin-left: -15px;margin-right: -15px;">
+            start footer-copyright
+         
+            <div class="col-sm-12" align="Center">
+                <strong style="color:Wheat;text-align: left;">Copyright @ 2017.All Rights Reserved By weibo.com</strong>
+            </div>
+        -->
+                 
+</div>
+
+<div ng-view>
+
+</div>
+
+</body>
+</html>
